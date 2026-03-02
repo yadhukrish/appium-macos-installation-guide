@@ -1,53 +1,31 @@
 # Appium Setup on macOS (Apple Silicon)
 
+> **Disclaimer:** This repository contains example software documentation created for a Technical Writing portfolio.  
+> It is not affiliated with or endorsed by the Appium project, Apple, Google, or any related organizations.  
+> This guide is intended for educational and demonstration purposes only.  
+> Some instructions may become outdated as tools, operating systems, or dependencies evolve.
+>
+> **Read Time:** 6–10 minutes
+
 ![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-black?logo=apple)
 ![Node.js](https://img.shields.io/badge/Node.js-LTS-green?logo=node.js)
 ![Appium](https://img.shields.io/badge/Appium-Latest-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-iOS%20%7C%20Android-purple)
-![License](https://img.shields.io/badge/License-Educational-lightgrey)
-
-
----
-## Quick Navigation
-
-| Section | Link |
-|-------|------|
-| Supported Environment | [Go](#supported-environment) |
-| System Requirements | [Go](#system-requirements) |
-| Install Node.js | [Go](#install-nodejs-using-nvm) |
-| Install Appium | [Go](#install-appium) |
-| iOS Setup | [Go](#ios-environment-setup) |
-| Android Setup | [Go](#android-environment-setup) |
-| Validation Script | [Go](#python-validation-script) |
-| Troubleshooting | [Go](#troubleshooting) |
-
----
-
 
 A **step-by-step guide for installing and configuring Appium on macOS** for **iOS and Android mobile automation testing**.
 
-This repository is designed as part of a **QA / Mobile Automation Engineering portfolio** and follows **industry-standard technical writing practices**.
-
-The goal is to provide a **clean, reproducible Appium setup for Apple Silicon Macs (M1 / M2 / M3 / newer)**.
+This repository is part of a **QA Automation / Technical Writing portfolio**, demonstrating how to document complex developer tooling using **clear, structured, beginner-friendly technical documentation**.
 
 ---
 
-## Target Audience
+# Table of Contents
 
-- Beginners learning mobile automation
-- QA Engineers transitioning to automation
-- Mobile Automation Engineers setting up a local environment
-
----
-## Table of Contents
-
+- [Quick Start](#quick-start)
+- [Architecture Overview](#appium-architecture-overview)
 - [Supported Environment](#supported-environment)
 - [System Requirements](#system-requirements)
 - [Prerequisites](#prerequisites)
-- [Install Homebrew](#install-homebrew)
-- [Install Node.js Using NVM](#install-nodejs-using-nvm)
-- [Install Appium](#install-appium)
-- [Install Appium Drivers](#install-appium-drivers)
+- [Installation Guide](#installation-guide)
 - [iOS Environment Setup](#ios-environment-setup)
 - [Android Environment Setup](#android-environment-setup)
 - [Configure Environment Variables](#configure-environment-variables)
@@ -56,19 +34,19 @@ The goal is to provide a **clean, reproducible Appium setup for Apple Silicon Ma
 - [Troubleshooting](#troubleshooting)
 - [Useful Resources](#useful-resources)
 
-
 ---
-## Quick Start
 
-If you want to get Appium running quickly, follow these minimal steps.
+# Quick Start
 
-### 1. Install Homebrew
+If you want to run Appium quickly, follow these minimal steps.
+
+Install Homebrew:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### 2. Install NVM and Node.js
+Install Node.js using NVM:
 
 ```bash
 brew install nvm
@@ -82,7 +60,7 @@ export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh
 ```
 
-Reload the shell:
+Reload shell:
 
 ```bash
 source ~/.zshrc
@@ -94,39 +72,37 @@ Install Node.js:
 nvm install --lts
 ```
 
-### 3. Install Appium
+Install Appium:
 
 ```bash
 npm install -g appium
 ```
 
-### 4. Install Drivers
+Install drivers:
 
 ```bash
 appium driver install xcuitest
 appium driver install uiautomator2
 ```
 
-### 5. Start Appium
+Start server:
 
 ```bash
 appium
 ```
 
-If the server starts successfully, your environment is ready.
-
-
 ---
-## Appium Architecture Overview
 
-The following diagram shows how Appium interacts with mobile platforms.
+# Appium Architecture Overview
+
+```mermaid
 flowchart TD
 
 TestScript["Test Script (Python / Java / JS)"]
 Client["Appium Client Library"]
 Server["Appium Server"]
-Driver["Appium Driver (XCUITest / UIAutomator2)"]
-Platform["Mobile Platform APIs"]
+Driver["Appium Driver"]
+Platform["Platform Automation APIs"]
 Device["Device / Emulator / Simulator"]
 App["Mobile Application"]
 
@@ -136,55 +112,23 @@ Server --> Driver
 Driver --> Platform
 Platform --> Device
 Device --> App
-
+```
 
 ### Architecture Explanation
 
 | Component | Description |
 |----------|-------------|
-| Test Script | Automation test written in Python, Java, or JavaScript |
-| Client Library | Sends automation commands to Appium |
-| Appium Server | Receives and routes automation commands |
-| Appium Driver | Platform-specific driver (XCUITest or UIAutomator2) |
+| Test Script | Automation tests written in Python, Java, or JS |
+| Client Library | Sends automation commands |
+| Appium Server | Processes automation requests |
+| Driver | Platform driver (XCUITest / UIAutomator2) |
 | Platform APIs | iOS or Android automation frameworks |
-| Device | Physical device, emulator, or simulator |
+| Device | Emulator, simulator, or real device |
 | App | Application under test |
 
-
-## Automation Test Execution Flow
-
-The following diagram illustrates how a test travels through the automation stack.
-sequenceDiagram
-
-participant TestScript
-participant AppiumClient
-participant AppiumServer
-participant Driver
-participant Device
-
-TestScript->>AppiumClient: Send automation command
-AppiumClient->>AppiumServer: HTTP request
-AppiumServer->>Driver: Forward command
-Driver->>Device: Execute platform automation
-Device-->>Driver: Response
-Driver-->>AppiumServer: Result
-AppiumServer-->>AppiumClient: Response
-AppiumClient-->>TestScript: Test result
-
 ---
 
-## What This Guide Covers
-
-- Installing **Node.js using NVM**
-- Installing **Appium (latest stable version)**
-- Installing **Appium drivers**
-- Configuring **iOS automation**
-- Configuring **Android automation**
-- Running a **Python validation test**
-
----
-
-## Supported Environment
+# Supported Environment
 
 | Component | Requirement |
 |-----------|-------------|
@@ -194,60 +138,46 @@ AppiumClient-->>TestScript: Test result
 | Node.js | Managed via NVM |
 | Platforms | iOS and Android |
 
----
-
-### Check macOS Version
+Check macOS version:
 
 ```bash
 sw_vers
 ```
 
-If your system is outdated, update macOS from:
+Update macOS if necessary:
 
+```
 System Settings → General → Software Update
+```
 
 ---
 
-## System Requirements
-
-Ensure your system meets the following requirements.
+# System Requirements
 
 | Requirement | Details |
 |-------------|--------|
 | RAM | Minimum 8 GB |
 | Disk Space | Minimum 20 GB |
-| Internet | Required for dependency downloads |
-
-These requirements ensure **stable Android emulators and iOS simulators**.
+| Internet | Required for downloading dependencies |
 
 ---
 
-## Prerequisites
-
-The following tools must be installed before setting up Appium.
+# Prerequisites
 
 | Tool | Purpose |
 |-----|--------|
 | Homebrew | macOS package manager |
 | NVM | Node version manager |
-| Node.js | Runtime environment for Appium |
+| Node.js | Runtime for Appium |
 | Xcode | Required for iOS automation |
 | Android Studio | Required for Android automation |
 
 ---
 
-## Installation Guide
-
-Follow the sections below to configure the Appium environment on macOS.
-
----
+# Installation Guide
 
 <details>
 <summary><strong>Install Homebrew</strong></summary>
-
-Homebrew is a package manager for macOS.
-
-Install Homebrew:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -272,13 +202,13 @@ Install NVM:
 brew install nvm
 ```
 
-Create the NVM directory:
+Create directory:
 
 ```bash
 mkdir ~/.nvm
 ```
 
-Open your shell configuration:
+Edit shell profile:
 
 ```bash
 nano ~/.zshrc
@@ -291,7 +221,7 @@ export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh
 ```
 
-Reload the shell:
+Reload shell:
 
 ```bash
 source ~/.zshrc
@@ -317,8 +247,6 @@ npm -v
 <details>
 <summary><strong>Install Appium</strong></summary>
 
-Install Appium globally:
-
 ```bash
 npm install -g appium
 ```
@@ -329,7 +257,7 @@ Verify installation:
 appium -v
 ```
 
-Run Appium doctor:
+Run doctor:
 
 ```bash
 npx appium-doctor
@@ -342,7 +270,7 @@ npx appium-doctor
 <details>
 <summary><strong>Install Appium Drivers</strong></summary>
 
-List available drivers:
+List drivers:
 
 ```bash
 appium driver list --updates
@@ -360,7 +288,7 @@ Install Android driver:
 appium driver install uiautomator2
 ```
 
-Verify installed drivers:
+Verify installation:
 
 ```bash
 appium driver list --installed
@@ -368,13 +296,11 @@ appium driver list --installed
 
 </details>
 
-## iOS Environment Setup
+---
 
-iOS automation requires **Xcode** and **iOS simulators**.
+# iOS Environment Setup
 
-### Install Xcode
-
-Download Xcode from the **Mac App Store**.
+Install **Xcode** from the Mac App Store.
 
 Verify installation:
 
@@ -382,7 +308,7 @@ Verify installation:
 xcode-select -p
 ```
 
-Accept the license agreement:
+Accept license:
 
 ```bash
 sudo xcodebuild -license accept
@@ -394,64 +320,62 @@ Install command line tools:
 xcode-select --install
 ```
 
-### Verify iOS Simulators
+List simulators:
 
 ```bash
 xcrun simctl list devices
 ```
 
-### Screenshot
+Screenshot placeholder:
 
-![Xcode Simulators](docs/images/xcode-simulators.png)
+```
+docs/images/xcode-simulators.png
+```
 
 ---
 
-## Android Environment Setup
-
-Android automation requires **Android Studio** and the **Android SDK**.
-
-### Install Android Studio
+# Android Environment Setup
 
 Download Android Studio:
 
 https://developer.android.com/studio
 
-Install the following components:
+Install components:
 
 - Android SDK
 - Android SDK Platform Tools
 - Android Emulator
 - Android SDK Build Tools
 
-### Verify ADB Installation
+Verify ADB:
 
 ```bash
 adb version
 ```
 
-Check connected devices:
+Check devices:
 
 ```bash
 adb devices
 ```
 
-### Screenshot
+Screenshot placeholder:
 
-![Android Emulator](docs/images/android-emulator.png)
+```
+docs/images/android-emulator.png
+```
 
 ---
 
-## Configure Environment Variables
+# Configure Environment Variables
 
-Add Android SDK paths to your shell configuration.
-
-Open your shell profile:
+Edit shell profile:
 
 ```bash
 nano ~/.zshrc
 ```
 
-Add the following lines:
+Add:
 
 ```bash
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -460,7 +384,7 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 ```
 
-Reload the shell:
+Reload shell:
 
 ```bash
 source ~/.zshrc
@@ -468,9 +392,9 @@ source ~/.zshrc
 
 ---
 
-## Verify Installation
+# Verify Installation
 
-Start the Appium server:
+Start Appium:
 
 ```bash
 appium
@@ -482,13 +406,13 @@ Expected output:
 Appium REST http interface listener started
 ```
 
-Verify installed drivers:
+Verify drivers:
 
 ```bash
 appium driver list --installed
 ```
 
-Run Appium doctor:
+Run doctor:
 
 ```bash
 npx appium-doctor
@@ -496,15 +420,15 @@ npx appium-doctor
 
 ---
 
-## Python Validation Script
+# Python Validation Script
 
-Install the Appium Python client:
+Install Python client:
 
 ```bash
 pip install Appium-Python-Client
 ```
 
-Example validation script:
+Example script:
 
 ```python
 from appium import webdriver
@@ -524,7 +448,7 @@ print("App launched successfully!")
 driver.quit()
 ```
 
-Run the script:
+Run:
 
 ```bash
 python scripts/python/test_appium.py
@@ -532,20 +456,16 @@ python scripts/python/test_appium.py
 
 ---
 
-## Troubleshooting
-
-## Troubleshooting
+# Troubleshooting
 
 <details>
 <summary>Node Version Issues</summary>
-
-Check Node version:
 
 ```bash
 node -v
 ```
 
-Switch Node version:
+Switch version:
 
 ```bash
 nvm use --lts
@@ -565,7 +485,7 @@ adb kill-server
 adb start-server
 ```
 
-Verify devices:
+Verify device:
 
 ```bash
 adb devices
@@ -578,24 +498,20 @@ adb devices
 <details>
 <summary>Appium Doctor Errors</summary>
 
-Run Appium Doctor:
-
 ```bash
 npx appium-doctor
 ```
 
-Follow the recommended fixes.
+Follow recommended fixes.
 
 </details>
+
 ---
 
-## Useful Resources
+# Useful Resources
 
 Appium Documentation  
 https://appium.io/docs/en/latest/
-
-Appium GitHub  
-https://github.com/appium/appium
 
 Android Developer Documentation  
 https://developer.android.com
@@ -605,6 +521,19 @@ https://developer.apple.com
 
 ---
 
-## License
+# About This Repository
 
-This project is provided for **educational and portfolio purposes**.
+This repository is part of a **QA Automation / Technical Writing portfolio**.
+
+It demonstrates:
+
+- structured developer documentation
+- beginner-friendly explanations
+- reproducible environment setup
+- validation through automation scripts
+
+---
+
+# License
+
+This repository is provided for **educational and portfolio purposes**.
