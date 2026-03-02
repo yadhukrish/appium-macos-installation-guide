@@ -236,9 +236,16 @@ The following tools must be installed before setting up Appium.
 
 ---
 
-## Install Homebrew
+## Installation Guide
 
-Homebrew simplifies installation of developer tools.
+Follow the sections below to configure the Appium environment on macOS.
+
+---
+
+<details>
+<summary><strong>Install Homebrew</strong></summary>
+
+Homebrew is a package manager for macOS.
 
 Install Homebrew:
 
@@ -252,13 +259,14 @@ Verify installation:
 brew --version
 ```
 
+</details>
+
 ---
 
-## Install Node.js Using NVM
+<details>
+<summary><strong>Install Node.js Using NVM</strong></summary>
 
-Using **NVM (Node Version Manager)** avoids dependency conflicts.
-
-### Install NVM
+Install NVM:
 
 ```bash
 brew install nvm
@@ -270,13 +278,13 @@ Create the NVM directory:
 mkdir ~/.nvm
 ```
 
-Open your shell configuration file:
+Open your shell configuration:
 
 ```bash
 nano ~/.zshrc
 ```
 
-Add the following lines:
+Add:
 
 ```bash
 export NVM_DIR="$HOME/.nvm"
@@ -289,7 +297,7 @@ Reload the shell:
 source ~/.zshrc
 ```
 
-### Install Node.js (LTS)
+Install Node.js:
 
 ```bash
 nvm install --lts
@@ -302,11 +310,14 @@ node -v
 npm -v
 ```
 
+</details>
+
 ---
 
-## Install Appium
+<details>
+<summary><strong>Install Appium</strong></summary>
 
-Install the latest stable version of Appium globally.
+Install Appium globally:
 
 ```bash
 npm install -g appium
@@ -318,31 +329,32 @@ Verify installation:
 appium -v
 ```
 
-Run Appium Doctor:
+Run Appium doctor:
 
 ```bash
 npx appium-doctor
 ```
 
+</details>
+
 ---
 
-## Install Appium Drivers
+<details>
+<summary><strong>Install Appium Drivers</strong></summary>
 
-Appium uses a **driver-based architecture**.
-
-### List available drivers
+List available drivers:
 
 ```bash
 appium driver list --updates
 ```
 
-### Install iOS Driver
+Install iOS driver:
 
 ```bash
 appium driver install xcuitest
 ```
 
-### Install Android Driver
+Install Android driver:
 
 ```bash
 appium driver install uiautomator2
@@ -354,7 +366,7 @@ Verify installed drivers:
 appium driver list --installed
 ```
 
----
+</details>
 
 ## iOS Environment Setup
 
