@@ -1,5 +1,6 @@
 # Appium Architecture
 
+```
 Tester
   │
   ▼
@@ -8,8 +9,10 @@ Test Scripts
   ▼
 Appium Server
   │
-  ├── Android Driver
-  └── iOS Driver
+  ├── Android Driver (UIAutomator2)
   │
-  ▼
-Mobile Devices
+  └── iOS Driver (XCUITest)
+          │
+          ▼
+   Mobile Devices / Emulators
+```
