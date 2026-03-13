@@ -202,20 +202,19 @@ Install NVM:
 brew install nvm
 ```
 
-Create directory:
-
+Create the NVM working directory — NVM stores Node.js versions here:
 ```bash
 mkdir ~/.nvm
 ```
 
-Edit shell profile:
-
+Add NVM to your shell profile so it loads automatically in every new terminal session.
+Open your shell configuration file:
 ```bash
 nano ~/.zshrc
 ```
 
-Add:
-
+Add the following lines — the first tells your shell where NVM lives,
+the second activates it:
 ```bash
 export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh
@@ -384,14 +383,16 @@ emulator-5554   device
 
 # Configure Environment Variables
 
-Edit shell profile:
+These variables tell your system where the Android SDK is installed so that
+tools like `adb` and the emulator can be called from any terminal window.
 
+Open your shell profile:
 ```bash
 nano ~/.zshrc
 ```
 
-Add:
-
+Add the following — each `PATH` line exposes a different set of Android tools
+to your terminal:
 ```bash
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$ANDROID_HOME/emulator:$PATH
