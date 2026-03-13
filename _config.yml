@@ -1,14 +1,9 @@
-google-site-verification:SNc5IN64Ga4oOUf74OZb9iUW8L2MoqsWBmE5xfSSLOY
-
-title: Appium Setup on macOS Apple Silicon - Installation Guide
-description: >
-  A step-by-step technical guide for installing and configuring 
-  Appium 3.x on macOS Apple Silicon (M1/M2/M3) for iOS and Android 
-  mobile automation testing. Covers Node.js, XCUITest, UIAutomator2.
+title: "Appium Setup on macOS Apple Silicon - Installation Guide"
+description: "Step-by-step guide for installing Appium 3.x on macOS Apple Silicon for iOS and Android mobile automation testing."
 url: "https://yadhukrish.github.io"
 baseurl: "/appium-macos-installation-guide"
-
-# SEO Plugin
+theme: jekyll-theme-minimal
+google_site_verification: "SNc5IN64Ga4oOUf74OZb9iUW8L2MoqsWBmE5xfSSLOY"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
