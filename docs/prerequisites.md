@@ -1,125 +1,156 @@
 # Prerequisites
 
-Before installing Appium on macOS, ensure that the required dependencies are installed and properly configured.
-
-This section describes the tools required to run Appium successfully.
-
----
-
-## System Requirements
-
-| Component | Requirement |
-|-----------|-------------|
-| Operating System | macOS 11 or later |
-| Package Manager | Homebrew |
-| Runtime Environment | Node.js (v16 or later) |
-| Package Manager | npm |
+This document describes all tools required before installing Appium on macOS (Apple Silicon).
+Complete every prerequisite in this guide before proceeding to any installation step.
 
 ---
 
-## Install Homebrew
+## Overview
 
-Homebrew is a package manager for macOS that simplifies the installation of development tools.
-
-### Install Homebrew
-
-Run the following command in Terminal:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-### Verify Installation
-
-```bash
-brew --version
-```
-
-Example output:
-
-```
-Homebrew 4.x.x
-```
+| Tool | Version | Purpose |
+|---|---|---|
+| macOS | 13 Ventura+ | Host operating system |
+| Xcode | Latest stable | iOS simulator and build tools |
+| Android Studio | Latest stable | Android SDK and emulator |
+| Homebrew | Latest stable | macOS package manager |
+| NVM | Latest stable | Node.js version manager |
+| Node.js | 20.19+ | Appium runtime |
+| npm | 10+ | Appium package installer |
+| Python | 3.8+ | Validation script runtime |
 
 ---
 
-## Install Node.js
+## macOS Version
 
-Appium runs on Node.js, so it must be installed before installing Appium.
+Appium 3.x on Apple Silicon requires macOS 13 Ventura or later.
 
-### Install Node.js
-
-```bash
-brew install node
-```
-
-### Verify Installation
-
-Check the Node.js version:
+Check your macOS version:
 
 ```bash
-node -v
+sw_vers
 ```
 
-Check the npm version:
-
-```bash
-npm -v
-```
-
-Example output:
+Expected output:
 
 ```
-v20.x.x
-10.x.x
+ProductName:    macOS
+ProductVersion: 14.x.x
+BuildVersion:   23xxxxx
+```
+
+If your version is below 13, update via:
+
+```
+System Settings → General → Software Update
 ```
 
 ---
 
-## Install Appium Doctor
+## Xcode
 
-Appium Doctor verifies whether your environment is properly configured.
+Xcode provides the iOS Simulator, build tools, and the XCUITest automation framework
+that Appium's iOS driver depends on.
 
-### Install Appium Doctor
+Install Xcode from the Mac App Store:
 
-```bash
-npm install -g appium-doctor
+```
+https://apps.apple.com/app/xcode/id497799835
 ```
 
-### Run Appium Doctor
+> **Note:** Xcode is a large download (~10 GB). Install this first while setting up
+> other prerequisites.
+
+Verify installation:
 
 ```bash
-appium-doctor
+xcode-select -p
 ```
 
-The tool checks for required dependencies and reports any missing components.
+Expected output:
+
+```
+/Applications/Xcode.app/Contents/Developer
+```
+
+Accept the Xcode license agreement — skipping this causes a cryptic error the first
+time any Xcode tool runs:
+
+```bash
+sudo xcodebuild -license accept
+```
+
+Install Xcode Command Line Tools — these provide compilers and build utilities
+that Appium's iOS driver depends on:
+
+```bash
+xcode-select --install
+```
 
 ---
 
-## Optional Dependencies
+## Android Studio
 
-Depending on the platform you want to test, additional tools may be required.
+Android Studio provides the Android SDK, ADB (Android Debug Bridge), and the
+emulator that Appium's Android driver depends on.
 
-### Android Testing
+Download Android Studio:
 
-For Android automation:
+```
+https://developer.android.com/studio
+```
 
-- Install Android Studio
-- Install Android SDK
-- Configure environment variables
+During setup, ensure the following components are selected in the SDK Manager:
 
-### iOS Testing
+| Component | Purpose |
+|---|---|
+| Android SDK | Core Android platform tools |
+| Android SDK Platform Tools | Provides `adb` command |
+| Android Emulator | Virtual Android device |
+| Android SDK Build Tools | Required for app compilation |
 
-For iOS automation:
+Verify ADB is accessible after installation:
 
-- Install Xcode
-- Install Xcode Command Line Tools
-- Configure developer certificates
+```bash
+adb version
+```
+
+Expected output:
+
+```
+Android Debug Bridge version 1.0.41
+Version 35.x.x
+```
+
+---
+
+## Disk Space and RAM
+
+Appium with both iOS and Android environments requires significant disk space.
+
+| Requirement | Minimum |
+|---|---|
+| RAM | 8 GB |
+| Free Disk Space | 20 GB |
+
+Check available disk space:
+
+```bash
+df -h /
+```
+
+---
+
+## Internet Connection
+
+An active internet connection is required throughout the installation process for:
+
+- Downloading Homebrew, NVM, Node.js
+- Installing Appium and its drivers via npm
+- Downloading Android SDK components via Android Studio
+- Downloading iOS Simulator runtimes via Xcode
 
 ---
 
 ## Next Step
 
-After completing the prerequisites, proceed to the next section:
-
-➡ **[Install Node.js](install-node.md)**
+Once all prerequisites are in place, proceed to [Install Node.js](install-node.md).
