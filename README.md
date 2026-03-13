@@ -38,59 +38,27 @@ This repository is part of a **QA Automation / Technical Writing portfolio**, de
 
 # Quick Start
 
-If you want to run Appium quickly, follow these minimal steps.
-
-Install Homebrew:
-
+> For experienced users who have Homebrew and Xcode already installed.
+> If this is your first time setting up Appium, skip to the [Installation Guide](#installation-guide).
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Install Node.js using NVM:
-
-```bash
-brew install nvm
-mkdir ~/.nvm
-```
-
-Add NVM to your shell:
-
-```bash
-export NVM_DIR="$HOME/.nvm"
-source $(brew --prefix nvm)/nvm.sh
-```
-
-Reload shell:
-
-```bash
+# Install Node.js via NVM
+brew install nvm && mkdir ~/.nvm
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.zshrc
 source ~/.zshrc
-```
-
-Install Node.js:
-
-```bash
 nvm install --lts
-```
 
-Install Appium:
-
-```bash
+# Install Appium and drivers
 npm install -g appium
-```
-
-Install drivers:
-
-```bash
 appium driver install xcuitest
 appium driver install uiautomator2
+
+# Verify
+npx appium-doctor
 ```
 
-Start server:
-
-```bash
-appium
-```
-
+> **Expected result:** Appium Doctor reports all required dependencies as satisfied.
+> Start the server with `appium` and proceed to [Verify Installation](#verify-installation).
 ---
 
 # Appium Architecture Overview
@@ -176,6 +144,11 @@ System Settings → General → Software Update
 
 # Installation Guide
 
+Follow these steps if you are setting up Appium for the first time.
+Each section includes verification steps to confirm a successful install
+before moving to the next dependency.
+
+> **Tip:** Complete each section in order — later steps depend on earlier ones.
 <details>
 <summary><strong>Install Homebrew</strong></summary>
 
