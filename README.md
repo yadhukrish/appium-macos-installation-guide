@@ -422,37 +422,52 @@ npx appium-doctor
 
 # Python Validation Script
 
-Install Python client:
+This script verifies your Appium setup by launching the Android Settings app on an emulator.
+It uses the Appium 2.x `AppiumOptions` style, the older dictionary-based capabilities format
+is no longer supported in Appium 2.x.
 
+**Prerequisites:** Ensure your Android emulator is running before executing this script.
+
+Install the Python client:
 ```bash
 pip install Appium-Python-Client
 ```
 
-Example script:
-
+Example script (`scripts/python/test_appium.py`):
 ```python
 from appium import webdriver
+from appium.options import UiAutomator2Options
 
-caps = {
-    "platformName": "Android",
-    "deviceName": "Android Emulator",
-    "automationName": "UiAutomator2",
-    "appPackage": "com.android.settings",
-    "appActivity": ".Settings"
-}
+# Define device and app capabilities using Appium 2.x AppiumOptions
+options = UiAutomator2Options()
+options.platform_name = "Android"
+options.device_name = "Android Emulator"
+options.app_package = "com.android.settings"
+options.app_activity = ".Settings"
 
-driver = webdriver.Remote("http://127.0.0.1:4723", caps)
-
-print("App launched successfully!")
-
-driver.quit()
+try:
+    # Connect to the running Appium server
+    driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+    print("App launched successfully!")
+finally:
+    # Always quit the driver to release the session
+    driver.quit()
+    print("Driver session closed.")
 ```
 
-Run:
-
+Run the script:
 ```bash
 python scripts/python/test_appium.py
 ```
+
+Expected output:
+```
+App launched successfully!
+Driver session closed.
+```
+
+> **Note:** If you see `AttributeError: module 'appium.options' has no attribute 'UiAutomator2Options'`,
+> upgrade your client: `pip install --upgrade Appium-Python-Client`
 
 ---
 
