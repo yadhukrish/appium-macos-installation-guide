@@ -7,9 +7,12 @@
 >
 > **Read Time:** 6–10 minutes
 
-![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-black?logo=apple)
-![Node.js](https://img.shields.io/badge/Node.js-LTS-green?logo=node.js)
-![Appium](https://img.shields.io/badge/Appium-Latest-blue)
+![macOS](https://img.shields.io/badge/macOS-13%20Ventura%2B-black?logo=apple)
+![Apple Silicon](https://img.shields.io/badge/Architecture-Apple%20Silicon%20M1%2B-black?logo=apple)
+![Node.js](https://img.shields.io/badge/Node.js-20.19%2B-green?logo=node.js)
+![npm](https://img.shields.io/badge/npm-10%2B-red?logo=npm)
+![Appium](https://img.shields.io/badge/Appium-3.2.0-blue)
+![Python](https://img.shields.io/badge/Python-3.8%2B-yellow?logo=python)
 ![Platforms](https://img.shields.io/badge/Platforms-iOS%20%7C%20Android-purple)
 
 A **step-by-step guide for installing and configuring Appium on macOS** for **iOS and Android mobile automation testing**.
@@ -102,9 +105,10 @@ Device --> App
 |-----------|-------------|
 | macOS | Any recent version |
 | Architecture | Apple Silicon (M1 / M2 / M3 / newer) |
-| Appium | Latest stable version |
-| Node.js | Managed via NVM |
-| Platforms | iOS and Android |
+| Appium | 3.2.0 (latest stable) |
+| Node.js | 20.19+ (managed via NVM) |
+| npm | 10+ |
+| Python | 3.8+ (for validation script) |
 
 Check macOS version:
 
