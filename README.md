@@ -326,11 +326,17 @@ List simulators:
 xcrun simctl list devices
 ```
 
-Screenshot placeholder:
+Verify your simulators are listed correctly. You should see output similar to:
+```
+== Devices ==
+-- iOS 17.0 --
+    iPhone 15 (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) (Shutdown)
+    iPhone 15 Pro (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) (Shutdown)
+-- iOS 16.4 --
+    iPhone 14 (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) (Shutdown)
+```
 
-```
-docs/images/xcode-simulators.png
-```
+> **Note:** If no devices appear, open Xcode → **Settings → Platforms** and download at least one iOS Simulator runtime.
 
 ---
 
@@ -359,11 +365,20 @@ Check devices:
 adb devices
 ```
 
-Screenshot placeholder:
+Verify your emulator is detected by ADB. After launching an emulator from Android Studio,
+run:
+```bash
+adb devices
+```
 
+You should see output similar to:
 ```
-docs/images/android-emulator.png
+List of devices attached
+emulator-5554   device
 ```
+
+> **Note:** If the emulator shows as `offline` instead of `device`, run `adb kill-server`
+> followed by `adb start-server` to reset the connection.
 
 ---
 
