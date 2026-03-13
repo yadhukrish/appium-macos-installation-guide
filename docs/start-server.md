@@ -57,7 +57,7 @@ A `"ready": true` response confirms the server is accepting connections.
 
 The following shows the Appium server running successfully in terminal:
 
-![Appium server start](../images/appium-server-start.png)
+<img src="../images/appium-server-start.png" alt="Appium server start" width="550">
 
 ---
 
